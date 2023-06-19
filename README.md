@@ -1,66 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# G1 Learn API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta é a API do Fórum desenvolvida utilizando PHP, Laravel e MySQL. Esta API fornece endpoints para gerenciar usuários, tópicos, respostas e outras funcionalidades relacionadas ao fórum.
 
-## About Laravel
+### Requisitos
+Antes de iniciar, certifique-se de ter os seguintes requisitos instalados em seu sistema:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP
+- Composer
+- MySQL
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Configuração
+Siga as etapas abaixo para configurar e executar a API do Fórum:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone este repositório em sua máquina local.
+2. Abra o terminal e navegue até o diretório raiz do projeto.
+3. Execute o seguinte comando para instalar as dependências do Laravel:
 
-## Learning Laravel
+```
+composer install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. Crie um arquivo .env a partir do arquivo .env.example. No arquivo .env, configure as informações do banco de dados:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+DB_CONNECTION=mysql
+DB_HOST=seu-host-do-banco-de-dados
+DB_PORT=porta-do-banco-de-dados
+DB_DATABASE=nome-do-banco-de-dados
+DB_USERNAME=seu-nome-de-usuário
+DB_PASSWORD=sua-senha
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Certifique-se de fornecer as informações corretas de conexão com o banco de dados.
 
-## Laravel Sponsors
+5. Execute o seguinte comando para gerar a chave de criptografia da aplicação:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+php artisan key:generate
+```
 
-### Premium Partners
+6. Execute o seguinte comando para executar as migrações e criar as tabelas do banco de dados:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```
+php artisan migrate
+```
 
-## Contributing
+Isso criará todas as tabelas necessárias para o funcionamento da API.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. Execute o seguinte comando para iniciar o servidor de desenvolvimento:
 
-## Code of Conduct
+```
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Endpoints
+A API do Fórum possui os seguintes endpoints disponíveis:
 
-## Security Vulnerabilities
+## GET
+- /api/posts: retorna todos os tópicos.
+- /api/posts/{post_id}: retorna tópico com id passado por parametro.
+- /api/posts/{post_id}/comments: retorna tópico com id passado por parametro incluindo todos os comentários e respostas relacionados ao tópico.
+- /api/posts/{post_id}/comments/{id}: retorna comentário de um post com id passado por parametro.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## POST
+- /api/posts: criar tópico.
+- /api/posts/{post_id}/comments: adicionar comentário ao post passado por parametro.
+- /api/posts/{post_id}/comments/{id}/replies: adicionar reposta ao comentário do post passado por parametro.
+ 
+   
